@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:component="clr-namespace:BackgroundTesteApp.Components"
+             x:Class="BackgroundTesteApp.Cadastro">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="30">
+            <Image Source="ZapWebLogo.png" Margin="0, 30" />
+
+            <Frame BackgroundColor="#267848" Padding="15, 5" CornerRadius="30">
+                <component:CleanEntry x:Name="Nome" Placeholder="Nome" PlaceholderColor="White" TextColor="White" HorizontalOptions="Center" WidthRequest="250" />
+            </Frame>
+            <Frame BackgroundColor="#267848" Padding="15, 5" CornerRadius="30">
+                <component:CleanEntry x:Name="Email" Placeholder="E-mail" PlaceholderColor="White" TextColor="White" HorizontalOptions="Center" WidthRequest="250" />
+            </Frame>
+            <Frame BackgroundColor="#267848" Padding="15, 5" CornerRadius="30">
+                <component:CleanEntry x:Name="Senha" Placeholder="Senha" IsPassword="True" PlaceholderColor="White" TextColor="White" HorizontalOptions="Center" WidthRequest="250" />
+            </Frame>
+
+            <Button x:Name="Cadastrar" Text="CADASTRAR" TextColor="White" BackgroundColor="#267848" HorizontalOptions="Center" WidthRequest="250" CornerRadius="30" />
+            <Label x:Name="Mensagem" HorizontalTextAlignment="Center" />
+            <ActivityIndicator x:Name="Processando" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

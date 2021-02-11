@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BackgroundColor="#F0F0F0"
+             xmlns:viewModel="clr-namespace:BackgroundTesteApp"
+             xmlns:dataTemplate="clr-namespace:BackgroundTesteApp"
+             xmlns:component="clr-namespace:BackgroundTesteApp.Components"
+             xmlns:converter="clr-namespace:BackgroundTesteApp.Converters"
+             x:Class="BackgroundTesteApp.ListagemMensagens">
+    <ContentPage.BindingContext>
+        <viewModel:ListagemMensagensViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:NomeConverter x:Key="nomeConverter" />
+
+            <DataTemplate x:Key="esquerdaPersonTemplate">
+                <ViewCell>
+                    <Grid BackgroundColor="#F0F0F0" Padding="7">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HasShadow="True" CornerRadius="20">
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image WidthRequest="25" Source="chatmsgsmall.png" />
+                                    <Label Text="{Binding Usuario.Nome, Converter={StaticResource nomeConverter}}" TextColor="Black"></Label>
+                                </StackLayout>
+                                <Label Text="{Binding Texto}" TextColor="#8C8C8C"></Label>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="direitaPersonTemplate">
+                <ViewCell>
+                    <Grid BackgroundColor="#F0F0F0" Padding="7" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Frame Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HasShadow="True" CornerRadius="20">
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                    <Label Text="{Binding Usuario.Nome, Converter={StaticResource nomeConverter}}" TextColor="Black"></Label>
+                                    <Image WidthRequest="25" Source="chatmsgsmall.png" />
+                                </StackLayout>
+                                <Label Text="{Binding Texto}" TextColor="#8C8C8C" HorizontalTextAlignment="End"></Label>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <dataTemplate:MensagemDataTemplateSelector x:Key="mensagemDataTemplateSelector"
+                EsquerdaTemplate="{StaticResource esquerdaPersonTemplate}"
+                DireitaTemplate="{StaticResource direitaPersonTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="Listagem" SeparatorVisibility="None" ItemsSource="{Binding Mensagems}" HasUnevenRows="True" ItemTemplate="{StaticResource mensagemDataTemplateSelector}" />
+
+            <Grid VerticalOptions="End" Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="55" />
+                </Grid.ColumnDefinitions>
+
+                <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="#32A060" Padding="15, 5" CornerRadius="30">
+
+                    <component:CleanEntry x:Name="Mensagem" Placeholder="Mensagem" PlaceholderColor="White" TextColor="White" WidthRequest="280" HorizontalOptions="StartAndExpand" />
+                </Frame>
+                <Button x:Name="Enviar" Grid.Row="0" Grid.Column="1" ImageSource="send.png" TextColor="White" BackgroundColor="#32A060" HorizontalOptions="Center" CornerRadius="30" WidthRequest="60"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
